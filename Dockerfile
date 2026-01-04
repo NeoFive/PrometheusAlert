@@ -1,6 +1,6 @@
-FROM golang:1.20.6-alpine3.18 as builder
+FROM golang:1.23.0-alpine3.18 as builder
 
-WORKDIR $GOPATH/src/github.com/feiyu563/PrometheusAlert
+WORKDIR $GOPATH/src/github.com/NeoFive/PrometheusAlert
 
 RUN apk update && \
     apk add --no-cache gcc g++ sqlite-libs make git
@@ -9,7 +9,7 @@ ENV GO111MODULE on
 
 ENV GOPROXY https://goproxy.io
 
-COPY . $GOPATH/src/github.com/feiyu563/PrometheusAlert
+COPY . $GOPATH/src/github.com/NeoFive/PrometheusAlert
 
 RUN make build
 
@@ -31,7 +31,7 @@ HEALTHCHECK --start-period=10s --interval=20s --timeout=3s --retries=3 \
 
 WORKDIR /app
 
-COPY --from=builder /go/src/github.com/feiyu563/PrometheusAlert/PrometheusAlert .
+COPY --from=builder /go/src/github.com/NeoFive/PrometheusAlert/PrometheusAlert .
 
 COPY db/PrometheusAlertDB.db /opt/PrometheusAlertDB.db
 

@@ -157,7 +157,14 @@ func SendMessageR(message Prometheus, rwxurl, rddurl, rfsurl, rphone, remail, rg
 			ChartsJson.Prometheus += 1
 			ddtext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Rlogourl + ")"
 			rltext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Rlogourl + ")"
-			fstext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Rlogourl + ")"
+			// 飞书使用 lark_md，仅支持 Markdown 子集，这里使用加粗和普通文本，避免使用标题井号和内联图片
+			fstext = "**" + Title + titleend + "**" + "\n\n" +
+				"[" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" +
+				"告警级别：" + AlertLevel[nLevel] + "\n" +
+				"开始时间：" + At + "\n" +
+				"结束时间：" + Et + "\n" +
+				"故障主机IP：" + RMessage.Labels.Instance + "\n\n" +
+				"**" + RMessage.Annotations.Description + "**"
 			wxtext = "[" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n>**[" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")**\n> <font color=\"info\">告警级别：</font>" + AlertLevel[nLevel] + "\n<font color=\"info\">开始时间：</font>" + At + "\n<font color=\"info\">结束时间：</font>" + Et + "\n<font color=\"info\">故障主机IP：</font>" + RMessage.Labels.Instance + "\n** <font color=\"info\">" + RMessage.Annotations.Description + "</font> **"
 			MobileMessage = "\n[" + Title + titleend + "]\n" + RMessage.Labels.Alertname + "\n" + "告警级别：" + AlertLevel[nLevel] + "\n" + "故障主机IP：" + RMessage.Labels.Instance + "\n" + RMessage.Annotations.Description
 			PhoneCallMessage = "故障主机IP " + RMessage.Labels.Instance + RMessage.Annotations.Description + "已经恢复"
@@ -175,7 +182,14 @@ func SendMessageR(message Prometheus, rwxurl, rddurl, rfsurl, rphone, remail, rg
 			ChartsJson.Prometheus += 1
 			ddtext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Logourl + ")"
 			rltext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Logourl + ")"
-			fstext = "## [" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n\n" + "#### [" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" + "###### 告警级别：" + AlertLevel[nLevel] + "\n\n" + "###### 开始时间：" + At + "\n\n" + "###### 结束时间：" + Et + "\n\n" + "###### 故障主机IP：" + RMessage.Labels.Instance + "\n\n" + "##### " + RMessage.Annotations.Description + "\n\n" + "![" + Title + "](" + Logourl + ")"
+			// 飞书使用 lark_md，仅支持 Markdown 子集，这里使用加粗和普通文本，避免使用标题井号和内联图片
+			fstext = "**" + Title + titleend + "**" + "\n\n" +
+				"[" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")\n\n" +
+				"告警级别：" + AlertLevel[nLevel] + "\n" +
+				"开始时间：" + At + "\n" +
+				"结束时间：" + Et + "\n" +
+				"故障主机IP：" + RMessage.Labels.Instance + "\n\n" +
+				"**" + RMessage.Annotations.Description + "**"
 			wxtext = "[" + Title + titleend + "](" + RMessage.GeneratorUrl + ")\n>**[" + RMessage.Labels.Alertname + "](" + message.Externalurl + ")**\n> <font color=\"warning\">告警级别：</font>" + AlertLevel[nLevel] + "\n<font color=\"warning\">开始时间：</font>" + At + "\n<font color=\"warning\">结束时间：</font>" + Et + "\n<font color=\"warning\">故障主机IP：</font>" + RMessage.Labels.Instance + "\n** <font color=\"warning\">" + RMessage.Annotations.Description + "</font> **"
 			MobileMessage = "\n[" + Title + titleend + "]\n" + RMessage.Labels.Alertname + "\n" + "告警级别：" + AlertLevel[nLevel] + "\n" + "故障主机IP：" + RMessage.Labels.Instance + "\n" + RMessage.Annotations.Description
 			PhoneCallMessage = "故障主机IP " + RMessage.Labels.Instance + RMessage.Annotations.Description

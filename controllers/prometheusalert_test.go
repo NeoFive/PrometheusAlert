@@ -7,8 +7,9 @@ import (
 )
 
 func TestGetTimeDuration(t *testing.T) {
-	source := "2023-08-04T02:51:54.972Z"
-	duration := GetTimeDuration(source)
+	start := "2023-08-04T02:51:54.972Z"
+	end := "2023-08-04T03:01:54.972Z"
+	duration := GetTimeDuration(start, end)
 	if assert.NotEqual(t, "", duration) {
 		t.Log(duration)
 	}
