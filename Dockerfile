@@ -1,4 +1,4 @@
-FROM golang:1.23.0-alpine3.18 as builder
+FROM golang:1.23-alpine AS builder
 
 WORKDIR $GOPATH/src/github.com/NeoFive/PrometheusAlert
 
