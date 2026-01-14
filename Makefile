@@ -1,5 +1,5 @@
 SHELL:=/bin/sh
-.PHONY: all format vet test build clean docker docker-push docker-test
+.PHONY: all format vet test build build-nomod clean docker docker-push docker-test
 
 export GO111MODULE=on
 export GOPROXY=https://goproxy.io
@@ -32,8 +32,17 @@ all: ${TARGET}
 
 ${TARGET}: ${SOURCE}
 	@echo ">> building code"
-	go mod tidy
-	go mod vendor
+	@if [ -z "$$DOCKER_BUILD" ]; then \
+		echo ">> running go mod tidy & vendor"; \
+		go mod tidy; \
+		go mod vendor; \
+	else \
+		echo ">> DOCKER_BUILD set, skip go mod tidy/vendor"; \
+	fi
+	GOMAXPROCS=1 go build -ldflags "$(VERSION_LDFLAGS)" -o ${TARGET}
+
+build-nomod:
+	@echo ">> building code (no go mod tidy/vendor)"
 	GOMAXPROCS=1 go build -ldflags "$(VERSION_LDFLAGS)" -o ${TARGET}
 
 format:

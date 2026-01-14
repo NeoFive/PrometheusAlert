@@ -8,7 +8,8 @@ RUN apk update && \
 ENV GO111MODULE=on \
     GOPROXY=https://goproxy.io,direct \
     GOTOOLCHAIN=local \
-    GOMAXPROCS=1
+    GOMAXPROCS=1 \
+    DOCKER_BUILD=1
 
 COPY . $GOPATH/src/github.com/NeoFive/PrometheusAlert
 
