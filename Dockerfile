@@ -5,9 +5,10 @@ WORKDIR $GOPATH/src/github.com/NeoFive/PrometheusAlert
 RUN apk update && \
     apk add --no-cache gcc g++ sqlite-libs make git
 
-ENV GO111MODULE on
-
-ENV GOPROXY https://goproxy.io
+ENV GO111MODULE=on \
+    GOPROXY=https://goproxy.io,direct \
+    GOTOOLCHAIN=local \
+    GOMAXPROCS=1
 
 COPY . $GOPATH/src/github.com/NeoFive/PrometheusAlert
 
